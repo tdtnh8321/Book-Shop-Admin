@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 import { addItems, addImport, clear } from "../importSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 function FormImport(props) {
   const dispatch = useDispatch();
   const authSlice = useSelector((slice) => slice.auth);
@@ -55,6 +56,9 @@ function FormImport(props) {
         })
       );
       dispatch(addItems(dataImport));
+      toast.success("Điền phiếu nhập thành công", { position: "top-right" });
+    } else {
+      toast.error("Không thể điền phiếu nhập", { position: "top-right" });
     }
   };
   // console.log({ excelFile });

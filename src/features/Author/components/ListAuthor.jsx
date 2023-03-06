@@ -1,5 +1,6 @@
 import { useState } from "react";
 import authorQuery from "../../../queries/AuthorQuery";
+import { toast } from "react-hot-toast";
 
 function ListAuthor(props) {
   const { listAuthor, setForm } = props;
@@ -12,6 +13,9 @@ function ListAuthor(props) {
     setIsMutationEnabled((prev) => true);
     const res = await deleteAuthor(id);
     console.log(res.msg);
+    toast.success(res.msg, {
+      position: "top-right",
+    });
     setIsMutationEnabled((prev) => false);
   };
   return (

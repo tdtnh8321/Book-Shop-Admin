@@ -1,5 +1,6 @@
 import { useState } from "react";
 import typeQuery from "../../../queries/TypeQuery";
+import { toast } from "react-hot-toast";
 
 function ListType(props) {
   const { listType, setForm } = props;
@@ -11,6 +12,7 @@ function ListType(props) {
     setIsMutationEnabled((prev) => true);
     const res = await deleteType(id);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   return (

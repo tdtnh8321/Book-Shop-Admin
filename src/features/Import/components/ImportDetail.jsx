@@ -1,5 +1,6 @@
 import { useState } from "react";
 import importQuery from "../../../queries/ImportQuery";
+import { toast } from "react-hot-toast";
 
 function ImportDetail(props) {
   const { id, handleClose, status } = props;
@@ -8,8 +9,11 @@ function ImportDetail(props) {
   const [isMutation, setIsMutation] = useState(false);
   const { mutateAsync: updateStatus } = importQuery.updateStatus(isMutation);
   const handleSubmit = async () => {
+    setIsMutation((prev) => true);
     const res = await updateStatus({ idImport: id });
     console.log(res);
+    toast.success(res.msg, { position: "top-right" });
+    setIsMutation((prev) => false);
   };
 
   return (
@@ -65,7 +69,7 @@ function ImportDetail(props) {
                         onClick={handleSubmit}
                         className="px-2 py-1 rounded-lg bg-blue-400 text-white"
                       >
-                        Duyet
+                        Duyệt
                       </button>
                     </th>
                   </tr>

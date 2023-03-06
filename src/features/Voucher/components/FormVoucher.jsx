@@ -1,5 +1,6 @@
 import { useState } from "react";
 import voucherQuery from "../../../queries/VoucherQuery";
+import { toast } from "react-hot-toast";
 
 function FormVoucher(props) {
   const { form, setForm } = props;
@@ -32,12 +33,14 @@ function FormVoucher(props) {
     setIsMutationEnabled((prev) => true);
     const res = await createVoucher(voucher);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   const handleUpdateVoucher = async () => {
     setIsMutationEnabled((prev) => true);
     const res = await updateVoucher(voucher);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   return (

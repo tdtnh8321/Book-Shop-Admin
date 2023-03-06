@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Pagination from "../../../custom-fields/Pagination";
 import bookQuery from "../../../queries/BookQuery";
+import { toast } from "react-hot-toast";
 function ListBook(props) {
   const { listBook, setForm, currentPage, countPage, handleChangePage } = props;
   const [isMutationEnabled, setIsMutationEnabled] = useState(false); //bật tắt mutation
@@ -9,7 +10,7 @@ function ListBook(props) {
   const handleDeleteBook = async (id) => {
     setIsMutationEnabled((prev) => true);
     const res = await deleteBook(id);
-    console.log(res);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   return (

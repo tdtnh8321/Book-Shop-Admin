@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clear } from "../importSlice";
 import { useState } from "react";
 import importQuery from "../../../queries/ImportQuery";
+import { toast } from "react-hot-toast";
 function ListImportItem(props) {
   const importSlice = useSelector((slice) => slice.import);
   const { items, import: importInfo } = importSlice;
@@ -9,8 +10,11 @@ function ListImportItem(props) {
   const dispatch = useDispatch();
   const { mutateAsync: createImport } = importQuery.createImport(isMutation);
   const handleSubmit = async () => {
+    setIsMutation((prev) => true);
     const res = await createImport({ items, importInfo });
     console.log(res);
+    toast.success(res.msg, { position: "top-right" });
+    setIsMutation((prev) => false);
   };
   return (
     <>
@@ -70,7 +74,7 @@ function ListImportItem(props) {
               className="px-2 py-1 rounded-lg bg-blue-500 text-white"
               onClick={handleSubmit}
             >
-              Them
+              Thêm
             </button>
             <button
               className="px-2 py-1 rounded-lg bg-red-500 text-white"

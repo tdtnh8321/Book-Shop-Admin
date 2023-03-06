@@ -3,6 +3,7 @@ import { fetchApiUploadAvatar } from "../../../queries/UploadQuery";
 import authorQuery from "../../../queries/AuthorQuery";
 import typeQuery from "../../../queries/TypeQuery";
 import bookQuery from "../../../queries/BookQuery";
+import { toast } from "react-hot-toast";
 
 function FormBook(props) {
   const { form, setForm } = props;
@@ -53,12 +54,14 @@ function FormBook(props) {
         //   err: "No files were uploaded.",
         //   success: "",
         // });
-        return console.log("No files were uploaded.");
+        return toast.error("No files were uploaded.", {
+          position: "top-right",
+        });
       }
 
       if (file.size > 1024 * 1024) {
         //return setData({ ...data, err: "Size too large.", success: "" });
-        return console.log("Size too large");
+        return toast.error("Size too large", { position: "top-right" });
       }
 
       if (file.type !== "image/jpeg" && file.type !== "image/png") {
@@ -67,7 +70,9 @@ function FormBook(props) {
         //   err: "File format is incorrect.",
         //   success: "",
         // });
-        return console.log("File format is incorrect");
+        return toast.error("File format is incorrect", {
+          position: "top-right",
+        });
       }
 
       let formData = new FormData();
@@ -95,12 +100,14 @@ function FormBook(props) {
     setIsMutationEnabled((prev) => true);
     const res = await updateBook(book);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   const handleAdd = async () => {
     setIsMutationEnabled((prev) => true);
     const res = await createBook(book);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   return (

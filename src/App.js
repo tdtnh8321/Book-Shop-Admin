@@ -10,6 +10,7 @@ import { fetchGetToken } from "./queries/TokenQuery";
 import { setToken } from "./features/Auth/tokenSlice";
 import { login, setAccount } from "./features/Auth/authSlice";
 import { fetchApiGetProfile } from "./queries/AuthQuery";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ function App() {
           })}
         </Routes>
       </BrowserRouter>
+      <Toaster />
     </Suspense>
   );
 }

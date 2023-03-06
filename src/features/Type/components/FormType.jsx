@@ -1,5 +1,6 @@
 import { useState } from "react";
 import typeQuery from "../../../queries/TypeQuery";
+import { toast } from "react-hot-toast";
 
 function FormType(props) {
   const { form, setForm } = props;
@@ -26,12 +27,14 @@ function FormType(props) {
     setIsMutationEnabled((prev) => true);
     const res = await createType(typeBook);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   const handleUpdateType = async () => {
     setIsMutationEnabled((prev) => true);
     const res = await updateType(typeBook);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   return (

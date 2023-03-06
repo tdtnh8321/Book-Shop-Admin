@@ -1,5 +1,6 @@
 import { useState } from "react";
 import voucherQuery from "../../../queries/VoucherQuery";
+import { toast } from "react-hot-toast";
 
 function ListVoucher(props) {
   const { listVoucher, setForm } = props;
@@ -12,6 +13,7 @@ function ListVoucher(props) {
     setIsMutationEnabled((prev) => true);
     const res = await deleteVoucher(id);
     console.log(res.msg);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   return (

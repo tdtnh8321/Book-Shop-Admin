@@ -1,6 +1,7 @@
 import { useState } from "react";
 import orderQuery from "../../../queries/OrderQuery";
 import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 
 function OrderDetail(props) {
   const { detail, handleCloseForm } = props;
@@ -25,6 +26,7 @@ function OrderDetail(props) {
     };
     setIsMutationEnabled((prev) => true);
     const res = await updateStatus(params);
+    toast.success(res.msg, { position: "top-right" });
     setIsMutationEnabled((prev) => false);
   };
   return (

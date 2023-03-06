@@ -1,5 +1,6 @@
 import { useState } from "react";
 import authorQuery from "../../../queries/AuthorQuery";
+import { toast } from "react-hot-toast";
 
 function FormAuthor(props) {
   const { form, setForm } = props;
@@ -24,16 +25,24 @@ function FormAuthor(props) {
     authorQuery.createAuthor(isMutationEnabled);
   const { mutateAsync: updateAuthor } =
     authorQuery.updateAuthor(isMutationEnabled);
+
   const handleCreateAuthor = async () => {
     setIsMutationEnabled((prev) => true);
     const res = await createAuthor(author);
     console.log(res.msg);
+    toast.success(res.msg, {
+      position: "top-right",
+    });
     setIsMutationEnabled((prev) => false);
   };
+
   const handleUpdateAuthor = async () => {
     setIsMutationEnabled((prev) => true);
     const res = await updateAuthor(author);
     console.log(res.msg);
+    toast.success(res.msg, {
+      position: "top-right",
+    });
     setIsMutationEnabled((prev) => false);
   };
   return (
