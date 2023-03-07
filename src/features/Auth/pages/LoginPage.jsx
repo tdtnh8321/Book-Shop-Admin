@@ -22,7 +22,7 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     try {
       const res = await fetchApiLogin({ email, password });
-      // console.log(res.msg);
+      console.log(res);
       if (res.rs == 0) {
         return toast.error(res.msg);
       }
