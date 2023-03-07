@@ -20,7 +20,8 @@ function App() {
   useEffect(() => {
     if (auth.isLogged === true) {
       const getToken = async () => {
-        const res = await fetchGetToken();
+        const firstLogin = localStorage.getItem("firstLogin");
+        const res = await fetchGetToken(firstLogin);
         console.log(res);
         dispatch(setToken(res.access_token));
       };

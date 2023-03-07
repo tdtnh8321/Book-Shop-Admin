@@ -28,8 +28,8 @@ function LoginPage() {
       }
       if (res.rs == 1) {
         toast.success(res.msg);
+        localStorage.setItem("firstLogin", res.refresh_token);
       }
-      localStorage.setItem("firstLogin", true);
       dispatch(login());
       navigate("/home");
     } catch (error) {
